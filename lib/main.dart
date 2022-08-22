@@ -1,9 +1,12 @@
 import 'package:bsection/button.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:country_state_city_picker/country_state_city_picker.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 

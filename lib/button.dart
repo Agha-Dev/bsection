@@ -1,3 +1,5 @@
+import 'package:bsection/services/database_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Buttons extends StatefulWidget {
@@ -13,6 +15,7 @@ class _ButtonsState extends State<Buttons> {
   int a = 0;
   int group = 1;
   int b = 0;
+  FirebaseAuth auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,28 +74,45 @@ class _ButtonsState extends State<Buttons> {
                     a = 0;
                   });
                 }),
-             Card(
-              shadowColor: Colors.pinkAccent,
-              elevation: 15.0,
-              child: Padding(
-                padding: EdgeInsets.all(8.0),
-                // child: Text("Abu Bakar"),
-                child:Container(
-                height:300, 
-                width:250,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child:Column(
-                  children: [
-                     SizedBox(height:100 ,),
-                    Text("Abubakar"),
-                  ],
-                )
+            //  Card(
+            //   shadowColor: Colors.pinkAccent,
+            //   elevation: 15.0,
+            //   child: Padding(
+            //     padding: EdgeInsets.all(8.0),
+            //     // child: Text("Abu Bakar"),
+            //     child:Container(
+            //     height:300,
+            //     width:250,
+            //     decoration: BoxDecoration(
+            //       borderRadius: BorderRadius.circular(30),
+            //     ),
+            //     child:Column(
+            //       children: [
+            //          SizedBox(height:100 ,),
+            //         Text("Abubakar"),
+            //       ],
+            //     )
 
-                ),
-              ),
-            )
+            //     ),
+            //   ),
+            // )
+            const SizedBox(height: 30),
+            ElevatedButton(
+                onPressed: () async {
+                  await auth.createUserWithEmailAndPassword(
+                      email: "faraz@gmail.com", password: "12341234");
+                },
+                child: const Text("Register")),
+            ElevatedButton(
+                onPressed: () async {
+                  await Database.store();
+                },
+                child: const Text("store")),
+            ElevatedButton(
+                onPressed: () async {
+                  await Database.get();
+                },
+                child: const Text("get"))
           ],
         ),
       ),
